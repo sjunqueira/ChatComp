@@ -13,15 +13,15 @@ Antes de iniciar, certifique-se de ter os seguintes requisitos instalados:
 
 1. Clone este repositório em sua máquina local:
 
-```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
-```
+    ```bash
+    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    ```
 
 2. Instale as dependências utilizando o arquivo requirements.txt:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Executando o Agente
 
@@ -31,9 +31,9 @@ Para executar o agente de IA, siga os seguintes passos:
 
 2. Execute o script principal do agente:
 
-```bash
-python agente.py
-```
+    ```bash
+    python agente.py
+    ```
 
 Isso iniciará a execução do agente, que estará pronto para interagir de acordo com as configurações pré-definidas.
 
@@ -42,5 +42,5 @@ Isso iniciará a execução do agente, que estará pronto para interagir de acor
 Sinta-se à vontade para contribuir com novas ideias, correções ou melhorias para este projeto. Basta seguir as diretrizes de contribuição do projeto e enviar um pull request.
 
 ---
-Este README foi criado automaticamente pelo assistente de IA para fornecer instruções básicas sobre como criar e executar o agente localmente.    
-```
+
+Este README foi criado automaticamente pelo assistente de IA para fornecer instruções básicas sobre como criar e executar o agente localmente.
