@@ -14,13 +14,13 @@ Antes de iniciar, certifique-se de ter os seguintes requisitos instalados:
 1. Clone este repositório em sua máquina local:
 
     ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    git clone https://github.com/sjunqueira/TravelAgentByGPT.git
     ```
 
-2. Instale as dependências utilizando o arquivo requirements.txt:
+2. Instale as dependências:
 
     ```bash
-    pip install -r requirements.txt
+    pip install -r langchain langchain langchain_community langchain_openai wikipedia duckduckgo-search openai
     ```
 
 ## Executando o Agente
@@ -32,7 +32,7 @@ Para executar o agente de IA, siga os seguintes passos:
 2. Execute o script principal do agente:
 
     ```bash
-    python agente.py
+    python travel_agent.py
     ```
 
 Isso iniciará a execução do agente, que estará pronto para interagir de acordo com as configurações pré-definidas.
