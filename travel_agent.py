@@ -7,28 +7,31 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableSequence
 #Imports para a função load_data
+import json
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import Chroma
 import bs4
 
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+
 # Definindo o modelo e as ferramentas
 model = ChatOpenAI(model="gpt-3.5-turbo")
 
-query = """
-Quero viajar para Londres em Outubro de 2024, encontre preços de passagens e eventos que irão acontecer em Outubro, quero um cronograma completo, de custos de passagens de avião de Florianópolis até Londres até custos de passeios e eventos que irão acontecer. 
-A viagem será feita em duas pessoas adultas casadas.
-"""
+# query = """
+# Quero viajar para Londres em Outubro de 2024, encontre preços de passagens e eventos que irão acontecer em Outubro, quero um cronograma completo, de custos de passagens de avião de Florianópolis até Londres até custos de passeios e eventos que irão acontecer. 
+# A viagem será feita em duas pessoas adultas casadas.
+# """
 
 def researchAgent(model, query):
     tools = load_tools(['ddg-search', 'wikipedia'], llm=model)
     prompt = hub.pull("hwchase17/react")
     # Criando o agente
     agent = create_react_agent(model, tools, prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, prompt=prompt, verbose=True)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, prompt=prompt) #Verbose
     web_context = agent_executor.invoke({"input": query})
     return web_context['output']
     
-print(researchAgent(model, query))
+#print(researchAgent(model, query))
 
 #Fazer toda a parte verde do fluxograma
 def loadData():
@@ -47,7 +50,7 @@ def loadData():
 def getRelevantDocs(query):
     retriever = loadData()
     relevant_docs = retriever.invoke(query)
-    print(relevant_docs)
+    #print(relevant_docs)
     return relevant_docs
 
 def supervisorAgent(model, query, web_context, relevant_docs):
@@ -77,4 +80,20 @@ def getResponse(query, model):
 
     return response
 
-print(getResponse(query, model).content)
+# print(getResponse(query, model).content)
+
+def lambdaHandler(event, context):
+    #query = event.get("question")
+    body = json.loads(event.get('body', {}))
+    query = body.get('question', 'Parametro question não fornecido')
+    response = getResponse(query, model).content
+    return {
+        "body": json.dumps({
+            "message": "Tarefa concluída com sucesso",
+            "details": response
+        }), 
+        "headers": {
+            "Content-type": "application/json"
+        },
+
+        "statusCode":200}

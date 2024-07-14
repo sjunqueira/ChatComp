@@ -1,0 +1,5 @@
+curl -X POST "http://Api-target-agent-121402643.us-east-2.elb.amazonaws.com" \
+-H "Content-type: application/json" \
+-d '{
+    "question": "Quero viajar para Londres em Outubro de 2024, encontre preços de passagens e eventos que irão acontecer em Outubro, quero um cronograma completo, de custos de passagens de avião de Florianópolis até Londres até custos de passeios e eventos que irão acontecer."
+}'
